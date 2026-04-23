@@ -865,70 +865,9 @@ HƯỚNG DẪN QUAN TRỌNG:
     setIsSidebarOpen(false);
   };
 
-  const [isPanelHidden, setIsPanelHidden] = useState(false);
-
   return (
-    <div className={`flex flex-col h-screen w-full mx-auto bg-white dark:bg-[#0a0a0b] overflow-hidden relative transition-colors duration-200 font-sans`} id="chat-container">
-      {/* Simulation Background (Visible when panel is hidden) */}
-      <AnimatePresence>
-        {isPanelHidden && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="absolute inset-0 z-0 bg-neutral-50 dark:bg-neutral-900 p-8 flex flex-col items-center justify-center text-center overflow-hidden"
-          >
-            <div className="max-w-2xl w-full space-y-8 opacity-40 select-none pointer-events-none">
-                <div className="flex items-center gap-4 border-b pb-4">
-                    <div className="w-12 h-12 bg-neutral-200 rounded-full"></div>
-                    <div className="flex-1 space-y-2">
-                        <div className="h-4 bg-neutral-200 rounded w-1/3"></div>
-                        <div className="h-4 bg-neutral-200 rounded w-1/2"></div>
-                    </div>
-                </div>
-                <div className="space-y-4">
-                    <div className="h-40 bg-neutral-100 rounded-2xl w-full"></div>
-                    <div className="h-4 bg-neutral-200 rounded w-3/4"></div>
-                    <div className="h-4 bg-neutral-200 rounded w-full"></div>
-                    <div className="h-4 bg-neutral-200 rounded w-5/6"></div>
-                </div>
-                <div className="grid grid-cols-3 gap-4">
-                    <div className="h-32 bg-neutral-100 rounded-xl"></div>
-                    <div className="h-32 bg-neutral-100 rounded-xl"></div>
-                    <div className="h-32 bg-neutral-100 rounded-xl"></div>
-                </div>
-                <p className="text-sm font-bold text-neutral-400">GIẢ LẬP: BẠN ĐANG DUYỆT MỘT TRANG WEB KHÁC...</p>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Floating Bubble (The Trigger) */}
-      <motion.div
-        drag
-        dragMomentum={false}
-        whileHover={{ scale: 1.1, rotate: 5 }}
-        whileTap={{ scale: 0.9 }}
-        className="fixed z-[100] w-14 h-14 bg-accent rounded-full shadow-2xl flex items-center justify-center text-white cursor-pointer border-4 border-white dark:border-neutral-800 shadow-accent/40"
-        style={{ position: 'fixed', right: '20px', bottom: '20px' }}
-        title={isPanelHidden ? "Mở AI Super App" : "Đóng AI Super App"}
-        onClick={() => setIsPanelHidden(!isPanelHidden)}
-      >
-        {isPanelHidden ? <Bot size={28} /> : <X size={28} />}
-        <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 border-2 border-white dark:border-neutral-900 rounded-full animate-pulse"></div>
-      </motion.div>
-
-      {/* Main App Content (Simulating Side Panel) */}
-      <AnimatePresence>
-        {!isPanelHidden && (
-            <motion.div
-                initial={{ x: '100%', opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                exit={{ x: '100%', opacity: 0 }}
-                transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                className="absolute inset-0 z-10 flex flex-col bg-white dark:bg-[#0a0a0b] shadow-2xl lg:relative"
-            >
-                {/* Sidebar Overlay */}
+    <div className={`flex flex-col h-screen w-full mx-auto bg-white dark:bg-[#0a0a0b] border-x border-neutral-200 dark:border-neutral-800 overflow-hidden relative transition-colors duration-200 font-sans`} id="chat-container">
+      {/* Sidebar Overlay */}
       <AnimatePresence>
         {isSidebarOpen && (
           <>
@@ -1963,9 +1902,6 @@ HƯỚNG DẪN QUAN TRỌNG:
             </div>
         </div>
       </footer>
-            </motion.div>
-        )}
-      </AnimatePresence>
 
       {/* Modern Image Gallery Overlay */}
       <AnimatePresence>
