@@ -962,58 +962,58 @@ HƯỚNG DẪN QUAN TRỌNG:
       </AnimatePresence>
 
       {/* Header Area */}
-      <header className={`px-6 py-4 border-b border-neutral-100 dark:border-neutral-800 flex items-center justify-between bg-white/80 dark:bg-[#0a0a0b]/80 backdrop-blur-md sticky top-0 z-20 transition-all ${isFocusMode ? 'h-0 py-0 opacity-0 pointer-events-none' : 'h-auto'}`} id="chat-header">
-        <div className="flex items-center gap-3">
+      <header className={`px-3 py-2 border-b border-neutral-100 dark:border-neutral-800 flex items-center justify-between bg-white/80 dark:bg-[#0a0a0b]/80 backdrop-blur-md sticky top-0 z-20 transition-all ${isFocusMode ? 'h-0 py-0 opacity-0 pointer-events-none' : 'h-auto'}`} id="chat-header">
+        <div className="flex items-center gap-2 min-w-0">
           <button 
             onClick={() => setIsSidebarOpen(true)}
-            className="p-2 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-xl transition-all lg:hidden"
+            className="p-1.5 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg transition-all lg:hidden flex-shrink-0"
           >
-            <Menu size={20} className="text-neutral-600 dark:text-neutral-400" />
+            <Menu size={18} className="text-neutral-600 dark:text-neutral-400" />
           </button>
-          <div className="relative">
-            <div className={`w-10 h-10 rounded-2xl bg-gradient-to-br from-accent to-accent-dark flex items-center justify-center text-white shadow-lg shadow-accent/20`}>
-              {persona.avatar ? <img src={persona.avatar} alt="Bot" className="w-full h-full object-cover rounded-2xl" /> : <Bot size={22} />}
+          <div className="relative flex-shrink-0">
+            <div className={`w-8 h-8 rounded-xl bg-gradient-to-br from-accent to-accent-dark flex items-center justify-center text-white shadow-lg shadow-accent/20`}>
+              {persona.avatar ? <img src={persona.avatar} alt="Bot" className="w-full h-full object-cover rounded-xl" /> : <Bot size={18} />}
             </div>
-            <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-green-500 border-2 border-white dark:border-[#0a0a0b] rounded-full shadow-sm"></div>
+            <div className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-green-500 border-2 border-white dark:border-[#0a0a0b] rounded-full shadow-sm"></div>
           </div>
-          <div>
-            <h1 className="text-sm font-bold text-neutral-900 dark:text-white tracking-tight leading-none mb-1">{persona.name}</h1>
-            <div className="flex items-center gap-1.5">
-              <span className="text-[10px] font-bold text-accent uppercase tracking-wider">{aiSettings.engine} Đang Hoạt Động</span>
-              <span className="w-1 h-1 rounded-full bg-neutral-300 dark:bg-neutral-700"></span>
-              <span className="text-[10px] font-medium text-neutral-500 dark:text-neutral-400">{aiSettings.model}</span>
+          <div className="min-w-0">
+            <h1 className="text-xs font-bold text-neutral-900 dark:text-white tracking-tight leading-none mb-0.5 truncate">{persona.name}</h1>
+            <div className="flex items-center gap-1 overflow-hidden">
+              <span className="text-[9px] font-bold text-accent uppercase tracking-wider truncate shrink-0">{aiSettings.engine}</span>
+              <span className="w-0.5 h-0.5 rounded-full bg-neutral-300 dark:bg-neutral-700 shrink-0"></span>
+              <span className="text-[9px] font-medium text-neutral-500 dark:text-neutral-400 truncate opacity-70 leading-none">{aiSettings.model}</span>
             </div>
           </div>
         </div>
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-0.5 flex-shrink-0">
           <button 
             onClick={() => setIsCanvasOpen(!isCanvasOpen)}
-            className={`p-2 rounded-xl transition-all ${isCanvasOpen ? 'bg-accent-soft text-accent' : 'text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800'}`}
+            className={`p-1.5 rounded-lg transition-all ${isCanvasOpen ? 'bg-accent-soft text-accent' : 'text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800'}`}
             title="Mở Canvas Area (Artifacts)"
           >
-            <FileText size={20} />
+            <FileText size={16} />
           </button>
           <button 
             onClick={() => setIsSearchOpen(!isSearchOpen)}
-            className={`p-2 transition-colors rounded-lg ${isSearchOpen ? 'text-accent bg-accent-soft dark:bg-accent-dark/20' : 'text-neutral-400 hover:text-accent hover:bg-neutral-50 dark:hover:bg-neutral-900'}`}
+            className={`p-1.5 transition-colors rounded-lg ${isSearchOpen ? 'text-accent bg-accent-soft dark:bg-accent-dark/20' : 'text-neutral-400 hover:text-accent hover:bg-neutral-50 dark:hover:bg-neutral-900'}`}
             title="Tìm kiếm tin nhắn (Ctrl+K)"
           >
-            <Search size={18} />
+            <Search size={16} />
           </button>
           <button 
             onClick={() => setIsFocusMode(!isFocusMode)}
-            className={`p-2 rounded-xl transition-all ${isFocusMode ? 'bg-accent-soft text-accent animate-pulse' : 'text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800'}`}
+            className={`p-1.5 rounded-lg transition-all ${isFocusMode ? 'bg-accent-soft text-accent animate-pulse' : 'text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800'}`}
           >
-            <Maximize2 size={20} />
+            <Maximize2 size={16} />
           </button>
           <button 
             onClick={() => setIsDarkMode(!isDarkMode)} 
-            className="p-2 text-neutral-400 hover:text-accent transition-colors rounded-lg hover:bg-neutral-50 dark:hover:bg-neutral-900"
+            className="p-1.5 text-neutral-400 hover:text-accent transition-colors rounded-lg hover:bg-neutral-50 dark:hover:bg-neutral-900"
           >
-            {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
+            {isDarkMode ? <Sun size={16} /> : <Moon size={16} />}
           </button>
-          <button onClick={() => setIsSettingsOpen(true)} className="p-2 text-neutral-400 hover:text-accent transition-colors rounded-lg hover:bg-neutral-50 dark:hover:bg-neutral-900" id="settings-btn" title="Cài đặt hệ thống (Ctrl+S)">
-            <Settings size={20} />
+          <button onClick={() => setIsSettingsOpen(true)} className="p-1.5 text-neutral-400 hover:text-accent transition-colors rounded-lg hover:bg-neutral-50 dark:hover:bg-neutral-900" id="settings-btn" title="Cài đặt hệ thống (Ctrl+S)">
+            <Settings size={16} />
           </button>
         </div>
       </header>
@@ -1607,7 +1607,7 @@ HƯỚNG DẪN QUAN TRỌNG:
         <main 
           ref={scrollContainerRef}
           onScroll={handleScroll}
-          className="flex-1 overflow-y-auto p-6 space-y-6 custom-scrollbar dark:bg-[#0a0a0b]" 
+          className="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar dark:bg-[#0a0a0b]" 
           id="message-list"
         >
         {messages.length === 0 ? (
@@ -1635,10 +1635,10 @@ HƯỚNG DẪN QUAN TRỌNG:
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.2 }}
-                className={`flex gap-4 ${message.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}
+                className={`flex gap-3 ${message.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}
               >
-                  <div className={`flex flex-col max-w-[85%] ${message.role === 'user' ? 'items-end' : 'items-start'}`}>
-                    <div className="flex items-center gap-2 mb-1 px-1">
+                  <div className={`flex flex-col max-w-[90%] ${message.role === 'user' ? 'items-end' : 'items-start'}`}>
+                    <div className="flex items-center gap-2 mb-0.5 px-0.5">
                       <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-400">
                         {message.role === 'user' ? 'Bạn' : persona.name}
                       </span>
@@ -1659,7 +1659,7 @@ HƯỚNG DẪN QUAN TRỌNG:
                       </div>
                     </motion.div>
                   )}
-                  <div className={`px-4 py-3 rounded-2xl shadow-sm ${
+                  <div className={`px-3 py-2 rounded-xl shadow-sm ${
                     message.role === 'user' 
                       ? 'bg-neutral-900 dark:bg-accent text-white rounded-tr-none' 
                       : message.role === 'system'
@@ -1733,35 +1733,35 @@ HƯỚNG DẪN QUAN TRỌNG:
       </div>
 
       {/* Input Area */}
-      <footer className="p-6 bg-white dark:bg-[#0a0a0b] border-t border-neutral-100 dark:border-neutral-800">
-        <div className="flex flex-col gap-3">
+      <footer className="p-3 bg-white dark:bg-[#0a0a0b] border-t border-neutral-100 dark:border-neutral-800">
+        <div className="flex flex-col gap-2">
             {/* Quick Actions & Prompt Lab */}
             {!isFocusMode && (
-                <div className="flex items-center justify-between gap-4">
-                    <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide flex-1">
+                <div className="flex items-center justify-between gap-2">
+                    <div className="flex gap-1.5 overflow-x-auto pb-1 scrollbar-hide flex-1">
                         <button 
                             onClick={quickCreateMail}
                             disabled={isLoading}
-                            className="flex items-center gap-2 px-4 py-2 bg-accent-soft dark:bg-accent-dark/30 text-accent dark:text-accent rounded-xl text-xs font-bold hover:bg-accent-soft/80 dark:hover:bg-accent-dark/50 transition-all whitespace-nowrap"
+                            className="flex items-center gap-1 px-3 py-1.5 bg-accent-soft dark:bg-accent-dark/30 text-accent dark:text-accent rounded-lg text-[10px] font-bold hover:bg-accent-soft/80 dark:hover:bg-accent-dark/50 transition-all whitespace-nowrap"
                         >
-                            <Mail size={14} /> Tạo Mail Mới
+                            <Mail size={12} /> Tạo Mail
                         </button>
                         <button 
                             onClick={quickCheckInbox}
                             disabled={isLoading || !currentMail}
-                            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
+                            className={`flex items-center gap-1 px-3 py-1.5 rounded-lg text-[10px] font-bold transition-all whitespace-nowrap ${
                                 !currentMail ? 'bg-neutral-50 dark:bg-neutral-900 text-neutral-300 dark:text-neutral-700' : 'bg-green-50 dark:bg-green-900/30 text-green-600 dark:text-green-400 hover:bg-green-100 dark:hover:bg-green-900/50'
                             }`}
                         >
-                            <Zap size={14} /> Kiểm tra Inbox
+                            <Zap size={12} /> Inbox
                         </button>
                         <button 
                             onClick={() => setIsPromptLabOpen(!isPromptLabOpen)}
-                            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
+                            className={`flex items-center gap-1 px-3 py-1.5 rounded-lg text-[10px] font-bold transition-all whitespace-nowrap ${
                                 isPromptLabOpen ? 'bg-amber-100 text-amber-600' : 'bg-neutral-50 dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800'
                             }`}
                         >
-                            <BookOpen size={14} /> Thư viện Prompt
+                            <BookOpen size={12} /> Prompts
                         </button>
                     </div>
                 </div>
@@ -1876,26 +1876,26 @@ HƯỚNG DẪN QUAN TRỌNG:
                         handleSend();
                     }
                     }}
-                    placeholder="Hỏi gì đó hoặc kéo thả file vào đây..."
+                    placeholder="Hỏi gì đó..."
                     rows={1}
-                    className="w-full pl-4 pr-24 py-4 bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl focus:outline-none focus:ring-2 focus:ring-accent-soft dark:focus:ring-accent-dark/30 focus:border-accent resize-none max-h-48 transition-all text-sm shadow-inner dark:text-white"
+                    className="w-full pl-3 pr-16 py-3 bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-accent-soft dark:focus:ring-accent-dark/30 focus:border-accent resize-none max-h-32 transition-all text-xs shadow-inner dark:text-white"
                 />
-                <div className="absolute right-2 flex items-center gap-1">
+                <div className="absolute right-1 flex items-center gap-0.5">
                     <button
                         onClick={toggleRecording}
-                        className={`p-2.5 rounded-xl transition-all ${isRecording ? 'bg-red-500 text-white animate-pulse' : 'text-neutral-400 hover:text-accent hover:bg-neutral-100 dark:hover:bg-neutral-800'}`}
-                        title={isRecording ? "Đang lắng nghe..." : "Nhập liệu bằng giọng nói"}
+                        className={`p-1.5 rounded-lg transition-all ${isRecording ? 'bg-red-500 text-white animate-pulse' : 'text-neutral-400 hover:text-accent hover:bg-neutral-100 dark:hover:bg-neutral-800'}`}
+                        title={isRecording ? "Đang lắng nghe..." : "Giọng nói"}
                     >
-                        {isRecording ? <MicOff size={18} /> : <Mic size={18} />}
+                        {isRecording ? <MicOff size={16} /> : <Mic size={16} />}
                     </button>
                     <button
                         onClick={handleSend}
                         disabled={(!input.trim() && !selectedImage && attachedFiles.length === 0) || isLoading}
-                        className={`p-2.5 rounded-xl transition-all ${
+                        className={`p-1.5 rounded-lg transition-all ${
                         (!input.trim() && !selectedImage && attachedFiles.length === 0) || isLoading ? 'text-neutral-300 dark:text-neutral-700' : 'bg-accent text-white shadow-lg shadow-accent/20 hover:bg-accent-dark'
                         }`}
                     >
-                        {isLoading ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} />}
+                        {isLoading ? <Loader2 size={16} className="animate-spin" /> : <Send size={16} />}
                     </button>
                 </div>
               </div>
