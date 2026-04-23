@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "AI Super App Multi-Tool",
+  "version": "1.0.1",
+  "description": "Tiện ích AI đa năng với Gemini, OpenAI, Claude và nhiều công cụ hữu ích.",
+  "action": {
+    "default_title": "Mở AI App"
+  },
+  "side_panel": {
+    "default_path": "index.html"
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "sidePanel"
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+}

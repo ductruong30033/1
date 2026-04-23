@@ -1,0 +1,17 @@
+{
+  "name": "AI Super App",
+  "short_name": "AI App",
+  "description": "Multi-engine AI Chat with Canvas, Voice, and Mail Temp",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3b82f6",
+  "icons": [
+    {
+      "src": "/vite.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
