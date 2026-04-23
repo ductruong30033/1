@@ -37,26 +37,38 @@
       right: 20px;
       width: 400px;
       height: 600px;
-      max-height: 80vh;
+      max-height: 85vh;
       max-width: 90vw;
-      border-radius: 16px;
+      border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+      box-shadow: 0 15px 50px rgba(0,0,0,0.25);
       z-index: 2147483646;
       background: white;
       display: none;
       border: 1px solid rgba(0,0,0,0.1);
       flex-direction: column;
       transform-origin: bottom right;
-      transition: transform 0.3s ease, opacity 0.3s ease;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
     }
     #ai-super-app-iframe-container.visible {
       display: flex;
-      animation: bubble-pop 0.3s ease-out;
     }
-    @keyframes bubble-pop {
-      from { transform: scale(0.5); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
+    #ai-super-app-header {
+      height: 40px;
+      background: #4f46e5;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: white;
+      padding: 0 15px;
+      cursor: grab;
+      user-select: none;
+      font-family: sans-serif;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    #ai-super-app-header:active {
+      cursor: grabbing;
     }
   `;
   document.head.appendChild(style);
@@ -82,30 +94,32 @@
     : window.location.origin;
 
   container.innerHTML = `
-    <iframe src="${extensionUrl}" style="width:100%; height:100%; border:none;"></iframe>
+    <div id="ai-super-app-header">
+      <span>AI Super App</span>
+      <div style="display:flex; gap:10px;">
+        <div id="ai-super-app-minimize" style="cursor:pointer; opacity:0.8;">—</div>
+      </div>
+    </div>
+    <iframe src="${extensionUrl}" style="width:100%; height:calc(100% - 40px); border:none;"></iframe>
   `;
 
-  // Drag and Drop Logic
-  let isDragging = false;
-  let startX, startY;
+  // Drag and Drop Logic for Bubble
+  let isDraggingBubble = false;
+  let bubbleStartX, bubbleStartY;
 
   bubble.onmousedown = (e) => {
-    isDragging = false;
-    startX = e.clientX;
-    startY = e.clientY;
+    isDraggingBubble = false;
+    bubbleStartX = e.clientX;
+    bubbleStartY = e.clientY;
     
     const onMouseMove = (moveEvent) => {
-      if (Math.abs(moveEvent.clientX - startX) > 5 || Math.abs(moveEvent.clientY - startY) > 5) {
-        isDragging = true;
-        const x = window.innerWidth - moveEvent.clientX - 28;
-        const y = window.innerHeight - moveEvent.clientY - 28;
-        bubble.style.right = (x > 0 ? x : 0) + 'px';
-        bubble.style.bottom = (y > 0 ? y : 0) + 'px';
-        
-        // Move container too if visible
-        container.style.right = bubble.style.right;
-        container.style.bottom = (parseInt(bubble.style.bottom) + 70) + 'px';
-      }
+        if (Math.abs(moveEvent.clientX - bubbleStartX) > 5 || Math.abs(moveEvent.clientY - bubbleStartY) > 5) {
+            isDraggingBubble = true;
+            const x = window.innerWidth - moveEvent.clientX - 28;
+            const y = window.innerHeight - moveEvent.clientY - 28;
+            bubble.style.right = (x > 0 ? (x < window.innerWidth - 56 ? x : window.innerWidth - 56) : 0) + 'px';
+            bubble.style.bottom = (y > 0 ? (y < window.innerHeight - 56 ? y : window.innerHeight - 56) : 0) + 'px';
+        }
     };
     
     document.addEventListener('mousemove', onMouseMove);
@@ -114,13 +128,55 @@
     }, { once: true });
   };
 
-  bubble.onclick = (e) => {
-    if (isDragging) return;
+  // Drag and Drop Logic for Container (Window)
+  const header = container.querySelector('#ai-super-app-header');
+  let isDraggingContainer = false;
+  let containerStartX, containerStartY, initialRight, initialBottom;
+
+  header.onmousedown = (e) => {
+    isDraggingContainer = true;
+    containerStartX = e.clientX;
+    containerStartY = e.clientY;
     
-    // Toggle Iframe UI
+    const rect = container.getBoundingClientRect();
+    initialRight = window.innerWidth - rect.right;
+    initialBottom = window.innerHeight - rect.bottom;
+
+    const onMouseMove = (moveEvent) => {
+      if (!isDraggingContainer) return;
+      const deltaX = containerStartX - moveEvent.clientX;
+      const deltaY = containerStartY - moveEvent.clientY;
+      container.style.right = (initialRight + deltaX) + 'px';
+      container.style.bottom = (initialBottom + deltaY) + 'px';
+    };
+
+    const onMouseUp = () => {
+      isDraggingContainer = false;
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseup', onMouseUp);
+    };
+
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
+  };
+
+  document.getElementById('ai-super-app-minimize')?.addEventListener('click', () => {
+    container.classList.remove('visible');
+  });
+
+  bubble.onclick = (e) => {
+    if (isDraggingBubble) return;
     const isVisible = container.classList.toggle('visible');
     
-    // Also try to open the Side Panel as a sync action (best for Chrome)
+    if (isVisible) {
+      const bubbleRect = bubble.getBoundingClientRect();
+      const rightShift = window.innerWidth - bubbleRect.right;
+      const bottomShift = window.innerHeight - bubbleRect.top + 10;
+      
+      container.style.right = rightShift + 'px';
+      container.style.bottom = bottomShift + 'px';
+    }
+    
     try {
         if (typeof chrome !== 'undefined' && chrome.runtime && chrome.runtime.sendMessage) {
             chrome.runtime.sendMessage({ action: 'open_side_panel' });
